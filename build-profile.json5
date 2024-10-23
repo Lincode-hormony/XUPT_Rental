@@ -27,7 +27,7 @@
   "modules": [
     {
       "name": "entry",
-      "srcPath": "./entry",
+      "srcPath": "./products/entry",
       "targets": [
         {
           "name": "default",
@@ -36,6 +36,34 @@
           ]
         }
       ]
+    },
+    {
+      "name": "network",
+      "srcPath": "./common/network"
+    },
+    {
+      "name": "uicomponent",
+      "srcPath": "./common/uicomponent",
+    },
+    {
+      "name": "home",
+      "srcPath": "./features/home",
+    },
+    {
+      "name": "discover",
+      "srcPath": "./features/discover",
+    },
+    {
+      "name": "map",
+      "srcPath": "./features/map",
+    },
+    {
+      "name": "roomlist",
+      "srcPath": "./features/roomlist",
+    },
+    {
+      "name": "mine",
+      "srcPath": "./features/mine",
     }
   ]
 }
