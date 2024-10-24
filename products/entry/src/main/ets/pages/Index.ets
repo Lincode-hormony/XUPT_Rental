@@ -1,4 +1,5 @@
 import {Home} from 'home'
+import {MainPage} from 'mine'
 
 let  TooTmp: ToolbarItem={
   'value':"func",
@@ -15,6 +16,7 @@ struct Index {
     Navigation() {
       Column(){
         Home()
+        MainPage()
       }
       .width('100%')
       .height('100%')
