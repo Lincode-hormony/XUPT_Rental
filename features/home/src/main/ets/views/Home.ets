@@ -71,7 +71,7 @@ export  struct Home {
   build() {
     Navigation(this.homePathStack){
       Scroll() {
-        Column(){
+        Column(){,jih
           Image(this.bannerList[0]?.imageURL)
             .width('100%')
             .height(200)
