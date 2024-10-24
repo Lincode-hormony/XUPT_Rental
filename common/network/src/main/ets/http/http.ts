@@ -1,8 +1,14 @@
-
+/**
+ * 使用ts文件 定义AnyObject类型，用于添加请求参数
+ */
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from '@ohos/axios';
 
+export interface AnyObject {
+  [key: string]: any
+}
+
 const request = axios.create({
-  baseURL: 'http://172.17.0.195:6060', // 通过 ipconfig 查询当前电脑的 ip，使用自己电脑的 ip 地址
+  baseURL: 'http://192.168.122.3:6060', // 通过 ipconfig 查询当前电脑的 ip，使用自己电脑的 ip 地址
   timeout: 20000,
 })
 
@@ -28,23 +34,24 @@ request.interceptors.response.use(
 )
 
 export  class Http {
-  get<T>(url: string, params?: Object) {
+  get<T>(url: string, params?: AnyObject) {
     return request.get<null, T>(url, {
       params
     })
   }
 
-  post<T>(url: string, data?: Object) {
+  post<T>(url: string, data?: AnyObject) {
     return request.post<null, T>(url, data)
   }
 
-  put<T>(url: string, data?: Object) {
+  put<T>(url: string, data?: AnyObject) {
     return request.put<null, T>(url, data)
   }
 
-  delete<T>(url: string, params?: Object) {
+  delete<T>(url: string, params?: AnyObject) {
     return request.delete<null, T>(url, {
       params
     })
   }
 };
+export const http=new Http()
