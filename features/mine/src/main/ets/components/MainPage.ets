@@ -2,7 +2,12 @@ import { router } from "@kit.ArkUI"
 
 @Preview
 @Component
-export struct MainPage {
+// // <<<<<<< HEAD
+// export struct MainPage {
+// =======
+export struct Mine {
+  @State message: string = '我的';
+// >>>>>>> main
 
   build() {
     Stack({alignContent:Alignment.TopStart}){

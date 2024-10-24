@@ -1,1 +1,1 @@
-export { MainPage } from './src/main/ets/components/MainPage'
+export { Discover } from './src/main/ets/components/MainPage'
