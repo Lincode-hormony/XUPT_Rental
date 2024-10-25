@@ -8,7 +8,7 @@ export interface AnyObject {
 }
 
 const request = axios.create({
-  baseURL: 'http://192.168.122.3:6060', // 通过 ipconfig 查询当前电脑的 ip，使用自己电脑的 ip 地址
+  baseURL: 'http://192.168.173.3:6060', // 通过 ipconfig 查询当前电脑的 ip，使用自己电脑的 ip 地址
   timeout: 20000,
 })
 

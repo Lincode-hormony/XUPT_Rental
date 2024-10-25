@@ -27,7 +27,7 @@ export interface IRentInfo{
   "title": string,
   "userTag": string
 }
-export type ISupportLIst=ISupportItem[]
+export type ISupportLIst=ISupportItem[]//服务与保障
 export interface  ISupportItem{
   "image": string,
   "title": string,

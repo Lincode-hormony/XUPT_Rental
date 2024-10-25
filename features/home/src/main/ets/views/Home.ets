@@ -3,13 +3,12 @@
  * 实现点击推荐房源 跳到详情页面
  */
 
-import { it } from '@ohos/hypium';
 import {LogUtil} from '@pura/harmony-utils'
 import { GetHomeDataApi,GetRoomRecommendApi } from '../apis/home';
 import type { IBannerList, INavList, IPlanList, ITileList ,IRoomRecommendList,IRoomRecommendItem} from '../model/HomeData';
 import {RoomPage} from  './RoomPage'
-import { router } from '@kit.ArkUI';
-
+import {RoomList} from './RoomList'
+import {SearchBar} from '../components/SearchBar'
 @Component
 export  struct Home {
   // 首页数据
@@ -20,11 +19,16 @@ export  struct Home {
   @State adPicture: string = '';
   //房源推荐数据
   @State roomRecommendList:IRoomRecommendList=[]
+
   @Consume('homePathStack') homePathStack:NavPathStack
+  // routermap
   @Builder
   homeRouter(name:string,id:string){
     if(name==='RoomPage'){
       RoomPage({roomId:id})
+    }
+    else if(name==='RoomList'){
+      RoomList()
     }
   }
   // 组件生命周期
@@ -52,6 +56,7 @@ export  struct Home {
         this.roomRecommendList=data
       })
   }
+
   @Builder
   RoomRecommendItem(item:IRoomRecommendItem){
     Column({space:10}){
@@ -72,10 +77,20 @@ export  struct Home {
     Navigation(this.homePathStack){
       Scroll() {
         Column(){
+          SearchBar()
+            .onClick(()=>{
+              this.homePathStack.pushPathByName('RoomList',null)
+            })
           Image(this.bannerList[0]?.imageURL)
             .width('100%')
             .height(200)
             .margin({bottom:50})
+          Button('更多推荐')
+            .width('90%')
+            .height(50)
+            .onClick(()=>{
+              this.homePathStack.pushPathByName('RoomList',null)
+            })
 
           ForEach(this.roomRecommendList,(item:IRoomRecommendItem,index)=>{
             this.RoomRecommendItem(item)
