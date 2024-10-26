@@ -36,7 +36,7 @@ export  struct Home {
     this.getHomeData()
     this.GetRoomRecommend()
   }
-
+  // 调用API获取首页上半区域数据
   getHomeData() {
     GetHomeDataApi()
       .then((data) => {
@@ -50,22 +50,31 @@ export  struct Home {
         LogUtil.debug("首页日志,获取错误")
       })
   }
+  // 调用API获取首页房源推荐区域数据
   GetRoomRecommend(){
     GetRoomRecommendApi()
       .then((data)=>{
         this.roomRecommendList=data
       })
   }
-
+  // 房源推荐区域
   @Builder
   RoomRecommendItem(item:IRoomRecommendItem){
-    Column({space:10}){
+    Column({space:10}) {
       Image(item.housePicture)
-        .width('90%')
+        .width(160)
+        // .height(210)
+        .objectFit(ImageFit.Fill)
+        .borderRadius({ topLeft:8,topRight:8 })
+        .onClick(()=>{
+          this.homePathStack.pushPathByName('RoomPage',item.id)
+        })
       Text(item.houseTitle)
+        .maxLines(1)
+        .textOverflow({overflow:TextOverflow.Ellipsis})
+        .fontSize(16)
     }
-    .margin({bottom:50})
-    .height(200)
+    .height(310)
     .width('100%')
     .onClick(()=>{
       this.homePathStack.pushPathByName('RoomPage',item.id)
@@ -81,20 +90,23 @@ export  struct Home {
             .onClick(()=>{
               this.homePathStack.pushPathByName('RoomList',null)
             })
-          Image(this.bannerList[0]?.imageURL)
-            .width('100%')
-            .height(200)
-            .margin({bottom:50})
-          Button('更多推荐')
-            .width('90%')
-            .height(50)
+
+          Image(this.bannerList[0]?.imageURL).width('100%').height(200).margin({bottom:50})
+
+          Button('更多推荐').width('90%').height(50)
             .onClick(()=>{
               this.homePathStack.pushPathByName('RoomList',null)
             })
 
-          ForEach(this.roomRecommendList,(item:IRoomRecommendItem,index)=>{
-            this.RoomRecommendItem(item)
-          })
+          Grid(){
+            ForEach(this.roomRecommendList,(item:IRoomRecommendItem,index)=>{
+              this.RoomRecommendItem(item)
+            })
+          }
+          .columnsTemplate("1fr 1fr")
+          .columnsGap(8)
+          .rowsTemplate("1fr 1fr 1fr 1fr")
+          .rowsGap(8)
         }
       }
       .scrollBar(BarState.Off)

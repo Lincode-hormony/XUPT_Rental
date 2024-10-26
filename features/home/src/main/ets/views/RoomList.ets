@@ -3,36 +3,109 @@
  */
 import { RoomListDataSource,IRoomItem, ISearchParams } from '../model/RoomList'
 import { GetRoomListApi } from '../apis/home'
-import { LogUtil } from '@pura/harmony-utils'
+import {locationTender} from '../components/locationRender'
+import {payTypeRender} from '../components/payTypeRender'
+import {PriceRender} from '../components/priceRender'
+import {SortRender} from '../components/sortRender'
 @Component
 export struct RoomList {
   @Consume('homePathStack') homePathStack:NavPathStack
   //设置API的搜索参数，以及数据源的排序，限制等
-  @State searchParams: ISearchParams = {
+  @Provide @Watch('isSearch') searchParams: ISearchParams = {
     page: 1,
     limit: 10
   }
   //返回的数据roomList 和 total
   @State roomList: RoomListDataSource = new RoomListDataSource()
   @State total: number = 0
-  @State isEnd:boolean=false//数据列表到底 不在refresh
+  @State isEnd:boolean=false  //数据列表到底 不在refresh
+  @State isShow:boolean=false //是否展示搜索下拉框
+  @State searchFilterText:string[]=['位置','支付方式','租金','排序']
+  @State currentFilter:string=''
+  /**
+   * 开启了筛选，重新获取数据
+   */
+  isSearch(){
+    this.isShow=false
+    this.currentFilter=''
+    this.GetRoomList()
+  }
+  //搜索筛选
+  @Builder
+  searchFilter(){
+    Column(){
+      Row(){
+        ForEach(this.searchFilterText,(text:string)=>{
+          Row(){
+            Text(text)
+            Image(this.currentFilter===text?$r('app.media.arrow_down_3_active'):$r('app.media.arrow_down_3')).width(10)
+          }.onClick(()=>this.changeIsShow(text))
+        },(text:string)=>text)
+      }.width('100%').height(44).padding({left:16,right:16})
+      .justifyContent(FlexAlign.SpaceBetween)
+
+      //搜索区域
+      Column(){
+        if(this.currentFilter==='位置'){locationTender()}
+        else if(this.currentFilter==='支付方式'){payTypeRender()}
+        else if(this.currentFilter==='租金'){PriceRender()}
+        else if(this.currentFilter==='排序'){SortRender()}
+      }.width('100%')
+      .visibility(this.isShow?Visibility.Visible:Visibility.Hidden)
+
+      //遮帐层
+      Row(){
+
+      }.width('100%').layoutWeight(1).backgroundColor('rgba(0,0,0,0.7)')
+      .visibility(this.isShow?Visibility.Visible:Visibility.Hidden)
+      .onClick(()=>{this.isShow=false})
+    }
+    .width('100%')
+    .height(this.isShow?'100%':44)
+  }
+
+  build() {
+    NavDestination(){
+      Stack(){
+        this.roomListWaterFlow()
+        this.searchFilter()
+      }
+      .align(Alignment.Top)
+
+    }
+    .title('房源列表').width('100%').height('100%')
+  }
+
   //
   aboutToAppear(): void {
     this.GetRoomList()
   }
   //获取房间数据列表
   async GetRoomList() {
-    const res = await GetRoomListApi(this.searchParams)
-    // 分页加载
-    if(this.searchParams.page===1){
-      this.roomList.setList(res.records)
-    }
-    else{
-      this.roomList.pushList(res.records)
-    }
-
-    this.total = Number(res.total)
-    // this.total =23
+    console.info('开始获取数据')
+    const res = GetRoomListApi(this.searchParams)
+      .then((data)=>{
+        const res=data
+        // 分页加载
+        if(this.searchParams.page===1){
+          this.roomList.setList(res.records)
+        }
+        else{
+          this.roomList.pushList(res.records)
+        }
+        this.total = Number(res.total)
+      })
+      .catch(()=>{
+      console.error('获取列表数据失败')
+    })
+    // // 分页加载
+    // if(this.searchParams.page===1){
+    //   this.roomList.setList(res.records)
+    // }
+    // else{
+    //   this.roomList.pushList(res.records)
+    // }
+    // this.total = Number(res.total)
   }
   //分页加载
   loadMore=()=>{
@@ -89,26 +162,36 @@ export struct RoomList {
       }
     }.width('100%').justifyContent(FlexAlign.Center)
   }
-
-  build() {
-    NavDestination(){
-      WaterFlow({footer:this.footer()}) {
-        LazyForEach(this.roomList, (item: IRoomItem, index) => {
-          FlowItem() {
-            this.roomItem(item)
-          }
-          .width(160).height(item.activity? 320:210).backgroundColor(Color.Orange)
-        })
-      }
-      .padding({
-        left: (16),
-        right: (16),
-        top: (8),
-      }).columnsTemplate('1fr 1fr').columnsGap(8).rowsGap(8).backgroundColor('#f7f7f7')
-      .onReachEnd(()=>{
-        this.loadMore();
+  //WaterFlow
+  @Builder
+  roomListWaterFlow(){
+    WaterFlow({footer:this.footer()}) {
+      LazyForEach(this.roomList, (item: IRoomItem, index) => {
+        FlowItem() {
+          this.roomItem(item)
+        }
+        .width(160).height(item.activity? 320:210).backgroundColor(Color.Orange)
       })
     }
-    .title('房源列表').width('100%').height('100%')
+    .padding({
+      left: (16),
+      right: (16),
+    }).columnsTemplate('1fr 1fr').columnsGap(8).rowsGap(8).backgroundColor('#f7f7f7')
+    .margin({top:88})
+    .onReachEnd(()=>{
+      this.loadMore();
+    })
+  }
+  changeIsShow=(text:string)=>{
+    if(text===this.currentFilter){
+      this.hideIsShow()
+      return
+    }
+    else this.isShow=true
+    this.currentFilter=text;
+  }
+  hideIsShow=()=>{
+    this.isShow=false;
+    this.currentFilter=''
   }
 }

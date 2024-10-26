@@ -116,3 +116,32 @@ export class RoomListDataSource implements IDataSource {
     })
   }
 }
+/**
+ * 省市区数据类型
+ */
+export interface IProvinceItem {
+  "code": string
+  "name": string
+}
+export type IProvinceList=IProvinceItem[]
+export interface ICityItem {
+  "code": string
+  "name": string
+  "provinceCode": string
+}
+export type ICityList = ICityItem[]
+//地区
+export interface IDistrictItem {
+  "code": string
+  "name": string
+  "cityCode": string
+  "provinceCode": string
+}
+export type IDistrictList = IDistrictItem[]
+//请求参数类型
+export interface GetCityListParams {
+  provinceCode: string
+}
+export interface GetDistrictListParams {
+  cityCode: string
+}
