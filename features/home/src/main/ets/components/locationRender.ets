@@ -82,6 +82,7 @@ export struct locationTender{
       Row(){
         Button('重置')
           .type(ButtonType.Normal).backgroundColor('#dddddd')
+          .width(95)
           .onClick(()=>{
             this.provinceCode='' // 省code
             this.cityCode= '' // 市code
@@ -91,6 +92,7 @@ export struct locationTender{
           })
         Button('查看房源')
           .type(ButtonType.Normal).backgroundColor('#009B71')
+          .width(211)
           .onClick(()=>{
             this.searchParams = {
               page: 1,

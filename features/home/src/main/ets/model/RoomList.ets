@@ -38,11 +38,33 @@ export interface ISearchParams{
   provinceCode?: string;
 }
 /**
+ * 租金限制
+ */
+export interface IPriceLimitItem{
+  id:number,
+  minRent?:string
+  maxRent?:string
+  text:string
+}
+export type IPriceLimitList=IPriceLimitItem[]
+/**
+ * 排序选项
+ */
+export interface ISortItem{
+  id:number
+  orderBy?:string
+  orderType?:string
+  text:string
+  img:Resource
+}
+export type ISortList=ISortItem[]
+/**
  * 懒加载数据类型
  */
+
 export class RoomListDataSource implements IDataSource {
-  private listeners: DataChangeListener[] = [];
-  private RoomList: IRoomList = [];
+   listeners: DataChangeListener[] = [];
+   RoomList: IRoomList = [];
 
   public totalCount(): number {
     return this.RoomList.length;

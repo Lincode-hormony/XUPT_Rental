@@ -9,6 +9,8 @@ import type { IBannerList, INavList, IPlanList, ITileList ,IRoomRecommendList,IR
 import {RoomPage} from  './RoomPage'
 import {RoomList} from './RoomList'
 import {SearchBar} from '../components/SearchBar'
+import { RoomListDataSource } from '../model/RoomList';
+
 @Component
 export  struct Home {
   // 首页数据
