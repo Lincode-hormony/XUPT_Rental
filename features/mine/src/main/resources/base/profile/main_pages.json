@@ -1,0 +1,6 @@
+{
+  "src": [
+    "components/MainPage",
+    "components/login"
+  ]
+}
