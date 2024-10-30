@@ -105,6 +105,7 @@ export  struct Home {
               this.RoomRecommendItem(item)
             })
           }
+          // .renderGroup(true)
           .columnsTemplate("1fr 1fr")
           .columnsGap(8)
           .rowsTemplate("1fr 1fr 1fr 1fr")
