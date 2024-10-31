@@ -3,12 +3,12 @@
  */
 import { RoomListDataSource,IRoomItem, ISearchParams } from '../model/RoomList'
 import { GetRoomListApi } from '../apis/home'
-import {locationTender} from '../components/locationRender'
-import {payTypeRender} from '../components/payTypeRender'
-import {PriceRender} from '../components/priceRender'
-import {SortRender} from '../components/sortRender'
+import {locationTender} from '../components/roomListComponent/locationRender'
+import {payTypeRender} from '../components/roomListComponent/payTypeRender'
+import {PriceRender} from '../components/roomListComponent/priceRender'
+import {SortRender} from '../components/roomListComponent/sortRender'
 import { ITagItem } from '../model/HomeData'
-import { roomItem } from '../components/roomItem'
+import { roomItem } from '../components/roomListComponent/roomItem'
 
 @Component
 export struct RoomList {
@@ -73,30 +73,11 @@ export struct RoomList {
     .width('100%')
     .height(this.isShow?'100%':44)
   }
-  //WaterFlow
-  // @Builder roomListWaterFlow(){
-  //   WaterFlow({footer:this.footer()}) {
-  //     LazyForEach(this.roomList, (item: IRoomItem, index) => {
-  //       FlowItem() {
-  //         this.roomItem(item)
-  //       }
-  //       .width(160).height(item.activity? 320:210).backgroundColor(Color.Orange)
-  //     },(item:IRoomItem)=>item.id)
-  //   }
-  //   .padding({
-  //     left: (16),
-  //     right: (16),
-  //   }).columnsTemplate('1fr 1fr').columnsGap(8).rowsGap(8).backgroundColor('#f7f7f7')
-  //   .margin({top:88})
-  //   .onReachEnd(()=>{
-  //     this.loadMore();
-  //   })
-  // }
 
   build() {
     NavDestination(){
       Stack(){
-        // this.roomListWaterFlow()
+        // 懒加载的组件复用
         WaterFlow({footer:this.footer()}) {
           LazyForEach(this.roomList, (item: IRoomItem, index) => {
             FlowItem() {
@@ -116,6 +97,7 @@ export struct RoomList {
         .onReachEnd(()=>{
           this.loadMore();
         })
+
         this.searchFilter()
       }
       .align(Alignment.Top)
@@ -165,47 +147,6 @@ export struct RoomList {
     this.searchParams.page++;
     this.GetRoomList()
   }
-  //单个房间组件
-
-  // @Builder roomItem(item:IRoomItem){
-  //   Column({space:10}) {
-  //     if(item.activity){
-  //       Row(){
-  //         Image(item.activity.icon)
-  //           .height(40)
-  //         Text(item.activity.title)
-  //           .fontSize(16)
-  //           .fontColor(item.activity.textColor)
-  //           .backgroundColor(item.activity.textBackGroundColor)
-  //       }
-  //       .height(50)
-  //       .width('100%')
-  //     }
-  //     Image(item.housePicture)
-  //       .width(160)
-  //       .objectFit(ImageFit.Fill)
-  //       .borderRadius({ topLeft:8,topRight:8 })
-  //       .onClick(()=>{
-  //         this.homePathStack.pushPathByName('RoomPage',item.id)
-  //       })
-  //     Text(item.houseTitle)
-  //       .maxLines(1)
-  //       .textOverflow({overflow:TextOverflow.Ellipsis})
-  //       .fontSize(12)
-  //     Text(item.rentPriceListing+item.rentPriceUnit).fontSize(12)
-  //     Row({space:8}){
-  //       Text('地点:'+item.address).fontSize(10)
-  //       Text(item.rentArea+'m2').fontSize(10)
-  //     }
-  //     List(){
-  //       ForEach(item.tags,(tagItem:ITagItem)=>{
-  //         ListItem(){Text(tagItem.name).fontSize(10)}.backgroundColor('#009B71')
-  //       })
-  //     }.listDirection(Axis.Horizontal)
-  //   }
-  //   .width('100%')
-  //   .height('100%')
-  // }
 
   //底部refresh组件
   @Builder footer(){

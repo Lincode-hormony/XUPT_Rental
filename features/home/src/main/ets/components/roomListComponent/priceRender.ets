@@ -1,4 +1,4 @@
-import { IPriceLimitItem, IPriceLimitList, ISearchParams } from "../model/RoomList"
+import { IPriceLimitItem, IPriceLimitList, ISearchParams } from "../../model/RoomList"
 
 @Component
 export struct PriceRender{

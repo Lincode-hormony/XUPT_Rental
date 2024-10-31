@@ -19,9 +19,9 @@ export interface  IRoomData{
   "discounts": IDiscountsList,
   "householdItem": IHouseholdItemList,
   "support": ISupportLIst,
-  "rentInfo": IRentInfoLIst
+  "rentInfo": IRentInfoList
 }
-export type IRentInfoLIst=IRentInfo[]
+export type IRentInfoList=IRentInfo[]
 export interface IRentInfo{
   "image": string,
   "title": string,

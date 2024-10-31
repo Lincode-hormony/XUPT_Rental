@@ -1,4 +1,4 @@
-import { ISortList,ISortItem, ISearchParams } from "../model/RoomList"
+import { ISortList,ISortItem, ISearchParams } from "../../model/RoomList"
 
 @Component
 export struct SortRender{

@@ -1,6 +1,6 @@
 import {IProvinceList,ICityList,IDistrictList,IProvinceItem,ICityItem,IDistrictItem,
-  ISearchParams} from '../model/RoomList'
-import {GetProvinceApi,GetCityApi,GetDistrictApi} from '../apis/home'
+  ISearchParams} from '../../model/RoomList'
+import {GetProvinceApi,GetCityApi,GetDistrictApi} from '../../apis/home'
 
 @Component
 export struct locationTender{

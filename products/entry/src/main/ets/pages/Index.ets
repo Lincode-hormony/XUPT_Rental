@@ -1,27 +1,5 @@
 import {Home} from 'home'
-// <<<<<<< HEAD
-// import {MainPage} from 'mine'
-//
-// let  TooTmp: ToolbarItem={
-//   'value':"func",
-//   'icon':"../../resources//base//media/home.svg",
-//   'action':()=>{}
-// }
-// let TooBar:ToolbarItem[]=[TooTmp,TooTmp,TooTmp,TooTmp,TooTmp]
-//
-// @Entry
-// @Component
-// struct Index {
-//
-//   build() {
-//     Navigation() {
-//       Column(){
-//         Home()
-//         MainPage()
-//       }
-//       .width('100%')
-//       .height('100%')
-// =======
+
 import {Discover} from 'discover'
 import {Map} from 'map'
 import {Mine} from 'mine'
@@ -67,7 +45,7 @@ struct Index {
       TabContent() {
         Mine()
       }.tabBar(this.tabBar($r('app.media.icon'), $r('app.media.icon'), '我的', 4))
-// >>>>>>> main
+
     }
     .height('100%')
     .width('100%')

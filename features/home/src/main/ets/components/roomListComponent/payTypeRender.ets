@@ -1,4 +1,4 @@
-import { ISearchParams } from "../model/RoomList"
+import { ISearchParams } from "../../model/RoomList"
 
 @Component
 export struct payTypeRender{

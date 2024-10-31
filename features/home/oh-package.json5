@@ -6,6 +6,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "network": "file:../../common/network"
+    "network": "file:../../common/network",
+    "uicomponent": "file:../../common/uicomponent"
   }
 }
