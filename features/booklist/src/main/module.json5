@@ -1,6 +1,6 @@
 {
   "module": {
-    "name": "roomlist",
+    "name": "booklist",
     "type": "har",
     "deviceTypes": [
       "default",

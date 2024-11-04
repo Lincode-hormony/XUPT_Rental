@@ -16,7 +16,9 @@ const request = axios.create({
 request.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     // 未来需要添加 token
-    // config.headers.token = token;
+    const token:string=AppStorage.get<string>("token");
+    // console.info(`固定的token = ${token}`)
+    if(token) config.headers.token = AppStorage.get<string>("token");
     return config;
   }
 )

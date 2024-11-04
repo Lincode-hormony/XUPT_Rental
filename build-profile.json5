@@ -58,8 +58,8 @@
       "srcPath": "./features/map",
     },
     {
-      "name": "roomlist",
-      "srcPath": "./features/roomlist",
+      "name": "booklist",
+      "srcPath": "./features/booklist"
     },
     {
       "name": "mine",

@@ -55,8 +55,12 @@ export struct PriceRender{
       text: '10000元以上'
     }
   ]
-  @State curPriceLimit:number=0
+  @State curPriceLimit:number=0//
   @Consume searchParams: ISearchParams
+  isRenderButton(label: string) : number {
+    console.info(`Button label ${label} is rendered`);
+    return 1;
+  }
   build() {
     Column(){
       Column(){
@@ -64,6 +68,7 @@ export struct PriceRender{
           ForEach(this.priceLimitList,(item:IPriceLimitItem)=>{
             GridItem(){
               Button(item.text)
+                .opacity(this.isRenderButton(item.text))
                 .type(ButtonType.Normal)
                 .fontSize(11)
                 .fontColor(this.curPriceLimit===item.id?Color.White:'#999999')

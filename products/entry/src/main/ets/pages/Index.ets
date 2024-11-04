@@ -3,7 +3,7 @@ import {Home} from 'home'
 import {Discover} from 'discover'
 import {Map} from 'map'
 import {Mine} from 'mine'
-import {RoomList} from 'roomlist'
+import {BookList} from 'booklist'
 @Entry
 @Component
 struct Index {
@@ -39,7 +39,7 @@ struct Index {
       }.tabBar(this.tabBar($r('app.media.icon'), $r('app.media.icon'), '地图', 2))
 
       TabContent() {
-        RoomList()
+        BookList()
       }.tabBar(this.tabBar($r('app.media.icon'), $r('app.media.icon'), '约房', 3))
 
       TabContent() {

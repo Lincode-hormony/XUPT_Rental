@@ -73,7 +73,10 @@ export struct RoomList {
     .width('100%')
     .height(this.isShow?'100%':44)
   }
-
+  isRenderRoomItem(label: string) : number {
+    console.info(`RoomItem label ${label} is rendered`);
+    return 1;
+  }
   build() {
     NavDestination(){
       Stack(){
@@ -81,7 +84,7 @@ export struct RoomList {
         WaterFlow({footer:this.footer()}) {
           LazyForEach(this.roomList, (item: IRoomItem, index) => {
             FlowItem() {
-              roomItem({item:item})
+              roomItem({item:item}).opacity(this.isRenderRoomItem(item.houseTitle))
             }
             .width(160).height(item.activity? 320:210).backgroundColor('#ffffff')
             .onClick(()=>{

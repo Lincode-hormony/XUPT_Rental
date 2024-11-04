@@ -10,7 +10,7 @@
     "home": "file:./features/home",
     "map": "file:./features/map",
     "mine": "file:./features/mine",
-    "roomlist": "file:./features/roomlist"
+    "booklist": "file:./features/booklist"
   },
   "devDependencies": {
     "@ohos/hypium": "1.0.19",
