@@ -68,7 +68,7 @@ export struct PriceRender{
           ForEach(this.priceLimitList,(item:IPriceLimitItem)=>{
             GridItem(){
               Button(item.text)
-                .opacity(this.isRenderButton(item.text))
+                // .opacity(this.isRenderButton(item.text))
                 .type(ButtonType.Normal)
                 .fontSize(11)
                 .fontColor(this.curPriceLimit===item.id?Color.White:'#999999')

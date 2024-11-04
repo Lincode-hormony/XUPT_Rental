@@ -37,22 +37,24 @@ export struct SortRender{
   ]
   @State curSortLimit:number=0
   @Consume searchParams: ISearchParams
-  isRenderImage(label: string) : number {
-    console.info(`Image label ${label} is rendered`);
-    return 1;
-  }
-  isRenderText(label: string) : number {
-    console.info(`Text label ${label} is rendered`);
-    return 1;
-  }
+  // isRenderImage(label: string) : number {
+  //   console.info(`Image label ${label} is rendered`);
+  //   return 1;
+  // }
+  // isRenderText(label: string) : number {
+  //   console.info(`Text label ${label} is rendered`);
+  //   return 1;
+  // }
   build() {
     Column(){
       List({space:6}){
         ForEach(this.sortList,(item:ISortItem)=>{
           ListItem(){
             Row({space:8}){
-              Image(item.img).width(20).opacity(this.isRenderImage(item.text))
-              Text(item.text).fontSize(12).fontColor(this.curSortLimit===item.id?'#009B71':'#666666').opacity(this.isRenderText(item.text))
+              Image(item.img).width(20)
+                // .opacity(this.isRenderImage(item.text))
+              Text(item.text).fontSize(12).fontColor(this.curSortLimit===item.id?'#009B71':'#666666')
+                // .opacity(this.isRenderText(item.text))
             }.height(34).backgroundColor(this.curSortLimit===item.id?'#eeeeee':Color.White)
             .margin({left:32}).padding(6)
             .onClick(()=>{

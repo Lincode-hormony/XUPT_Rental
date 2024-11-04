@@ -79,7 +79,7 @@ export struct RoomPage {
               if(this.householdItemList[1]) HouseholdItem2({householdItem:this.householdItemList[1]})
           }.margin({top:rvp(16)})
           if(this.supportLIst.length) SupportList({supportList:this.supportLIst})
-          TabBar()
+          TabBar({roomid:this.roomId})
         }
         .width('100%')
       }

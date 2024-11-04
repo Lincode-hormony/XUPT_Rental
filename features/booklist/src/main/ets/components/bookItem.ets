@@ -1,3 +1,7 @@
+/**
+ * author HLQ
+ */
+
 import { ITagItem } from "home/src/main/ets/model/HomeData"
 import { rvp } from "uicomponent"
 import { IBookHistoryItem } from "../model/BookData"

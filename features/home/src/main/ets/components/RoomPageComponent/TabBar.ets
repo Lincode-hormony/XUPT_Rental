@@ -1,7 +1,31 @@
+import { ToastUtil } from "@pura/harmony-utils";
 import { rvp } from "uicomponent";
+import { PostBookHome } from "../../apis/home";
+import { IBookHomeObject, IBookHomeParams } from "../../model/BookData";
 
 @Component
 export struct TabBar {
+  @Prop @Watch('onroomidChange') roomid:string
+  @State bookHomeParams:IBookHomeParams={} as IBookHomeParams
+  @State bookHomeObject:IBookHomeObject={} as IBookHomeObject
+  aboutToAppear(): void {
+    this.bookHomeParams={
+      "name": '黄令群',
+      "date": '2024-11-11',
+      "houseId": this.roomid,
+      "phone": '15322442034',
+      "comment": '测试死数据'
+    }
+  }
+  onroomidChange(){
+      this.bookHomeParams={
+        "name": '黄令群',
+        "date": '2024-11-11',
+        "houseId": this.roomid,
+        "phone": '15322442034',
+        "comment": '测试死数据'
+      }
+  }
   build() {
     Row(){
       Column(){
@@ -16,6 +40,19 @@ export struct TabBar {
         Text('立即预定').fontSize(rvp(14)).fontWeight(500).fontColor('#FFFFFF')
       }.width(rvp(113)).height(rvp(34)).type(ButtonType.Normal).backgroundColor('#24A17B')
       .margin({right:rvp(21)})
+      .onClick(()=>{
+        PostBookHome(this.bookHomeParams)
+          .then(()=>{
+          // this.bookHomeObject=data
+          //  console.info(`测试输出 bookHomeObject = ${JSON.stringify(this.bookHomeParams)}`)
+            ToastUtil.showToast('预约成功')
+        })
+          .catch(()=>{
+            // console.info(`测试输出 bookHomeObject = ${JSON.stringify(this.bookHomeParams)} ${JSON.stringify(this.roomid)}`)
+            ToastUtil.showToast('预约失败')
+        })
+
+      })
 
       Button(){
         Text('去看房').fontSize(rvp(14)).fontWeight(500).fontColor('#FFFFFF')
