@@ -1,11 +1,11 @@
-import { ToastUtil } from "@pura/harmony-utils";
+import { ToastUtil,PreferencesUtil} from "@pura/harmony-utils";
 import { rvp } from "uicomponent";
 import { PostBookHome } from "../../apis/home";
 import { IBookHomeObject, IBookHomeParams } from "../../model/BookData";
-
 @Component
 export struct TabBar {
   @Prop @Watch('onroomidChange') roomid:string
+  @State isLike:boolean=PreferencesUtil.hasSync(this.roomid)
   @State bookHomeParams:IBookHomeParams={} as IBookHomeParams
   @State bookHomeObject:IBookHomeObject={} as IBookHomeObject
   aboutToAppear(): void {
@@ -28,9 +28,24 @@ export struct TabBar {
   }
   build() {
     Row(){
+      /**
+       * 收藏
+       */
       Column(){
-        Image($r("app.media.like")).width(rvp(18))
-        Text('99+').fontSize(rvp(10)).fontWeight(500).fontColor('#999999')
+        Image(this.isLike?$r("app.media.lis_like"):$r("app.media.no_like")).width(rvp(18))
+          .onClick(()=>{
+            if(this.isLike){
+              PreferencesUtil.deleteSync(this.roomid)
+              this.isLike=false;
+              ToastUtil.showToast('取消收藏成功')
+            }
+            else{
+              PreferencesUtil.putSync(this.roomid,true);
+              this.isLike=true;
+              ToastUtil.showToast('收藏成功');
+            }
+          })
+        Text('收藏').fontSize(rvp(10)).fontWeight(500).fontColor('#999999')
       }.margin({right:rvp(27)})
       Column(){
         Image($r('app.media.question')).width(rvp(18))

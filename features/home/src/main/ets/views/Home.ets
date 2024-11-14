@@ -25,15 +25,17 @@ export  struct Home {
 
   @Consume('homePathStack') homePathStack:NavPathStack
   // routermap
-  @Builder
-  homeRouter(name:string,id:string){
-    if(name==='RoomPage'){
-      RoomPage({roomId:id})
-    }
-    else if(name==='RoomList'){
-      RoomList()
-    }
-  }
+
+  // @Builder
+  // homeRouter(name:string,id:string){
+  //   if(name==='RoomPage'){
+  //     RoomPage({roomId:id})
+  //   }
+  //   else if(name==='RoomList'){
+  //     RoomList()
+  //   }
+  // }
+
   // 组件生命周期
   aboutToAppear() {
     this.getHomeData()
@@ -62,16 +64,18 @@ export  struct Home {
   }
 
   build() {
-    Navigation(this.homePathStack){
+    // Navigation(this.homePathStack){
+    NavDestination() {
       Scroll() {
-        Column(){
-          MySwiper({bannerList:$bannerList}).margin({bottom:24})
-          RoomRecommendGrid({roomRecommendList:$roomRecommendList})
+        Column() {
+          MySwiper({ bannerList: $bannerList }).margin({ bottom: 24 })
+          RoomRecommendGrid({ roomRecommendList: $roomRecommendList })
         }
       }
       .scrollBar(BarState.Off)
       .width('100%')
       .height('100%')
-    }.navDestination(this.homeRouter)
+    }
+    // }.navDestination(this.homeRouter)
   }
 }

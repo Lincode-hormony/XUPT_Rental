@@ -46,9 +46,12 @@ Item用interface类型定义，List用type定义
 
 # Home
 
-作者：黄令群
+作者：HLQ
 
-内容：
+1. 实现了首页的轮播图，八个房源推荐
+2. 房源更多推荐里面的数据列表使用懒加载瀑布流实现
+3. 房源列表可以按照多种方式筛选
+4. 房间详情页面绘制完成
 
 # Discover	
 
@@ -60,11 +63,11 @@ Item用interface类型定义，List用type定义
 
 共同
 
-# RoomList	
+# bookList	
 
-作者：黄令群
+作者：HLQ
 
-内容：
+1. 页面基本绘制完成
 
 # Mine
 

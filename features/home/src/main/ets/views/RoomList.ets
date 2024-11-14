@@ -9,6 +9,7 @@ import {PriceRender} from '../components/roomListComponent/priceRender'
 import {SortRender} from '../components/roomListComponent/sortRender'
 import { ITagItem } from '../model/HomeData'
 import { roomItem } from '../components/roomListComponent/roomItem'
+import { rvp } from 'uicomponent'
 
 @Component
 export struct RoomList {
@@ -73,10 +74,10 @@ export struct RoomList {
     .width('100%')
     .height(this.isShow?'100%':44)
   }
-  isRenderRoomItem(label: string) : number {
-    console.info(`RoomItem label ${label} is rendered`);
-    return 1;
-  }
+  // isRenderRoomItem(label: string) : number {
+  //   console.info(`RoomItem label ${label} is rendered`);
+  //   return 1;
+  // }
   build() {
     NavDestination(){
       Stack(){
@@ -84,7 +85,8 @@ export struct RoomList {
         WaterFlow({footer:this.footer()}) {
           LazyForEach(this.roomList, (item: IRoomItem, index) => {
             FlowItem() {
-              roomItem({item:item}).opacity(this.isRenderRoomItem(item.houseTitle))
+              roomItem({item:item})
+                // .opacity(this.isRenderRoomItem(item.houseTitle))
             }
             .width(160).height(item.activity? 320:210).backgroundColor('#ffffff')
             .onClick(()=>{
@@ -96,7 +98,7 @@ export struct RoomList {
           left: (16),
           right: (16),
         }).columnsTemplate('1fr 1fr').columnsGap(8).rowsGap(8).backgroundColor('#f7f7f7')
-        .margin({top:88})
+        .margin({top:rvp(66)})
         .onReachEnd(()=>{
           this.loadMore();
         })
@@ -120,7 +122,7 @@ export struct RoomList {
     this.isLoading=true
     GetRoomListApi(this.searchParams)
     .then((data)=>{
-      console.debug('当前搜索参数'+JSON.stringify(this.searchParams))//
+     // console.debug('当前搜索参数'+JSON.stringify(this.searchParams))//
       const res=data
       // 分页加载
       if(this.searchParams.page===1){

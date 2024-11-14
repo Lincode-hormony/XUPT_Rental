@@ -12,6 +12,9 @@ export struct RoomRecommendGrid {
         Image(item.housePicture)
           .width(160).height(120)
           .borderRadius({ topLeft:8,topRight:8 })
+          // .onAppear(()=>{
+          //   console.info(item.houseTitle+"重新加载")
+          // })
         Row(){
           Image($r('app.media.location')).margin({left:6}).width(16)
           Text(item.address)

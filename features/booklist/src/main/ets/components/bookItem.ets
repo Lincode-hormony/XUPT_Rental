@@ -5,7 +5,9 @@
 import { ITagItem } from "home/src/main/ets/model/HomeData"
 import { rvp } from "uicomponent"
 import { IBookHistoryItem } from "../model/BookData"
-
+/**
+ * 预约房间项
+ */
 @Component
 export struct BookItem {
   @Prop bookHistoryItem:IBookHistoryItem
@@ -14,6 +16,7 @@ export struct BookItem {
       Row({space:rvp(4)}){
         Image($r('app.media.clock')).width(rvp(12))
         Text(this.bookHistoryItem.date).fontSize(rvp(12)).fontWeight(500).fontColor('#999999')
+          .maxLines(1).textOverflow({overflow:TextOverflow.Ellipsis})
         ForEach(this.bookHistoryItem.tags,(item:ITagItem)=>{
           Text(item.name).fontSize(rvp(12)).fontWeight(500).fontColor('#999999')
         })

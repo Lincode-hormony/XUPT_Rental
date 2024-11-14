@@ -16,8 +16,8 @@ export default class EntryAbility extends UIAbility {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
     /**
      * 先设置一个固定的token临时开发，后续换成自己的（在登录的时候设置）
-     */
-    AppStorage.setOrCreate('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3MzA5ODA3NjgsInVzZXJfaWQiOiIxIn0.r--ThVHWJMiZpm-ubtFyD_Jv3QHOZvtdbHsVgqXVN_E')
+     */                           //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3MzE4NDQ1MTUsInVzZXJfaWQiOiIxIn0.BlWvb40AZq8mucTWylVZFqEfpzcYUbgQ75r838BVJSE
+    AppStorage.setOrCreate('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3MzE4NDQ1MTUsInVzZXJfaWQiOiIxIn0.BlWvb40AZq8mucTWylVZFqEfpzcYUbgQ75r838BVJSE')
     windowStage.loadContent('pages/Index', (err) => {
       if (err.code) {
         hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');

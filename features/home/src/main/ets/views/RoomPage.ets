@@ -56,6 +56,8 @@ export struct RoomPage {
       })
   }
 
+
+
   @Builder
   NavTirle(){
     Text(this.houseTitle).fontWeight(700).fontSize(rvp(16)).textAlign(TextAlign.Center)
@@ -83,8 +85,8 @@ export struct RoomPage {
         }
         .width('100%')
       }
-      .width('100%')
-      .height('100%')
+      // .width('100%')
+      // .height('100%')
     }
     .title(this.NavTirle)
   }
