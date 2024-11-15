@@ -14,6 +14,7 @@ struct Index {
    * 定义相应的NavPathStack，供其他模块使用
    */
   @Provide('homePathStack') homePathStack:NavPathStack=new NavPathStack()
+  @Provide('loginPathStack') loginPathStack:NavPathStack =new NavPathStack()
   @State curIndex:number=0;
   /**
    * Tabs的Bar
