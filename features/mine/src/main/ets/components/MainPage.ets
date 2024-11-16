@@ -2,14 +2,34 @@ import { router } from "@kit.ArkUI"
 import {loginPage} from '../components/login'
 import {loginCode} from '../components/loginCode'
 import {LoginPhone} from '../components/login'
+import {getUserApi} from '../api/login'
 import {token} from '../components/loginCode'
 
-@Preview
+export class Response {
+  code: number=0
+  data: Data=new Data()
+  message: string='66'
+}
+
+class Data {
+  avatar: string=''
+  id: number=0
+  nickname: string=''
+}
+
+let storage=new LocalStorage()
+storage.setOrCreate('userInfo',new Response())
+
+
 @Component
 
 export struct Mine {
+
+  @LocalStorageLink('userInfo') userInfo:Response=new Response()
   @State message: string = '我的';
   @State Token:string=''
+  @StorageProp('Token') userToken:string=''
+  @State num:string='ss'
 
   @Consume('loginPathStack') pageStack :NavPathStack
 
@@ -23,13 +43,11 @@ export struct Mine {
   }
 
 
-  onPageShow(): void {
-
-  }
 
 
   build() {
     Navigation(this.pageStack){
+
       Stack({alignContent:Alignment.TopStart}){
         Row(){
           Text('导航栏')
@@ -56,6 +74,10 @@ export struct Mine {
                 Text('请先登录注册')
                   .fontSize(15)
               }
+
+              Text(this.userInfo.message)
+
+
             }
             .width(150)
             .height(65)
@@ -74,9 +96,7 @@ export struct Mine {
 
           }
 
-          ListItem(){
-            Text(this.Token)
-          }
+
         }
         .margin({top:35})
 
@@ -85,6 +105,7 @@ export struct Mine {
       .height('100%')
     }
     .navDestination(this.pageMap)
+
 
     //.backgroundColor(Color.Grey)
 

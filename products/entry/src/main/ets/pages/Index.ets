@@ -7,6 +7,9 @@ import {BookList} from 'booklist'
 import { RoomPage } from 'home/src/main/ets/views/RoomPage'
 import { RoomList } from 'home/src/main/ets/views/RoomList'
 
+//用于存放Token的全局变量
+AppStorage.setOrCreate('Token','暂无用户数据')
+
 @Entry
 @Component
 struct Index {
@@ -37,6 +40,8 @@ struct Index {
       RoomList()
     }
   }
+
+
 
   build() {
     Navigation(this.homePathStack){

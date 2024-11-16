@@ -1,5 +1,6 @@
 import {LoginPhone } from '../components/login'
-import {loginApi,userID} from '../api/login'
+import {loginApi,getUserApi} from '../api/login'
+import {Response} from '../components/MainPage'
 
 export class token{
   token:string='111'
@@ -9,12 +10,24 @@ export class token{
 @Component
 export struct loginCode {
 
-  async getUser(){
+
+  async getToken(){
     const result=await loginApi(this.phoneNumber.phone,this.phoneCode)
+    console.log('获取用户信息'+result.token)
     this.Token=result.token
+    this.userToken=this.Token
+
   }
 
-  @State Token:string=''
+  async getInfo(){
+    const result=await getUserApi(this.Token)
+    console.log('获取用户信息'+result.data.nickname)
+    this.userInfo=result as Response
+  }
+
+  @LocalStorageLink('userInfo') userInfo:Response=new Response()
+  @StorageLink('Token') userToken:string='暂无用户数据'
+  @State Token:string='暂无用户数据'
   @State phoneNumber:LoginPhone=new LoginPhone()
   @State phoneCode:string=''
   @Consume('loginPathStack') pageStack :NavPathStack
@@ -26,7 +39,7 @@ export struct loginCode {
           Image($r('app.media.close'))
             .width(20)
             .onClick(()=>{
-
+              this.pageStack.pop()
             })
 
           Text('验证码登录')
@@ -66,11 +79,10 @@ export struct loginCode {
             Button('确定')
               .backgroundColor('#ff69d76c')
               .onClick(()=>{
-                this.getUser()
-                let userToken:token=new token()
-                userToken.token=this.Token
-                console.log('获取Token1'+userToken)
-                this.pageStack.pop(userToken,true)
+                this.getToken()
+                this.getInfo()
+                console.log('获取用户信息'+this.userInfo.message)
+                this.pageStack.pop()
               })
 
 
