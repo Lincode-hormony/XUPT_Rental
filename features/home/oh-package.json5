@@ -7,6 +7,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "network": "file:../../common/network",
-    "uicomponent": "file:../../common/uicomponent"
+    "uicomponent": "file:../../common/uicomponent",
+    "permissionmanger": "file:../../common/permissionmanger"
   }
 }

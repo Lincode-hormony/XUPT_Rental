@@ -12,11 +12,6 @@
     "deliveryWithInstall": true,
     "installationFree": false,
     "pages": "$profile:main_pages",
-    "requestPermissions": [
-      {
-        "name": 'ohos.permission.INTERNET'
-      }
-    ],
     "abilities": [
       {
         "name": "EntryAbility",
@@ -52,6 +47,56 @@
           }
         ]
       }
+    ],
+    "requestPermissions": [
+      //-------------------   normal   -------------------
+      //------------------- user_grant -------------------
+      //定位权限
+      //权限等级：normal       对所有应用开放
+      //授权方式：system_grant   系统授权，不需要弹窗
+      {
+        "name": 'ohos.permission.INTERNET'
+      },
+      //定位权限
+      //权限等级：normal       对所有应用开放
+      //授权方式：user_grant   用户授权，需要弹窗
+      {
+        "name": 'ohos.permission.LOCATION',
+        //申请权限原因
+        "reason": "$string:premission_reason_location",
+        //使用场景
+        "usedScene": {}
+      },
+      {
+        "name": 'ohos.permission.APPROXIMATELY_LOCATION',
+        "reason": "$string:premission_reason_location",
+        "usedScene": {}
+      },
+      //日历权限申请
+      //权限等级：normal
+      //授权方式：user_grant
+      {
+        "name": "ohos.permission.READ_CALENDAR",
+        "reason":"$string:permission_reason_calendar",
+        "usedScene": {}
+      },
+      {
+        "name": "ohos.permission.WRITE_CALENDAR",
+        "reason":"$string:permission_reason_calendar",
+        "usedScene": {}
+      },
+      //------------------- system_basic -------------------
+      //受限开放权限，需要签名证书，开发阶段可通过 DevEco Studio 快速生成签名证书，项目上线需要到应用市场（AGC）生成证书
+//      {
+//        "name": "ohos.permission.READ_IMAGEVIDEO",
+//        "reason": "$string:permission_reason_calendar",
+//        "usedScene": {}
+//      },
+//      {
+//        "name": "ohos.permission.WRITE_IMAGEVIDEO",
+//        "reason": "$string:permission_reason_calendar",
+//        "usedScene": {}
+//      }
     ]
   }
 }

@@ -5,13 +5,17 @@ import {IRoomData} from '../model/Room'
 import {ISearchData,ISearchParams,IProvinceList,ICityList,IDistrictList,
 GetCityListParams,GetDistrictListParams} from '../model/RoomList'
 
+
 export const GetHomeDataApi=():Promise<IHomeData> =>{
     return http.get<IHomeData>('/home/info')
 }
 export const GetRoomRecommendApi=():Promise<IRoomRecommendList> =>{
     return http.get<IRoomRecommendList>('/house/nearbyHouses')
 }
-export const GetRoomDetailApi=(id:string):Promise<IRoomData> =>{
+/**
+ * 获取房间详情数据
+ */
+export const  GetRoomDetailApi=(id:string):Promise<IRoomData> =>{
     return http.get<IRoomData>('/house/detail', {id : id})
 }
 /**

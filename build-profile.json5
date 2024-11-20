@@ -1,6 +1,20 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "storePassword": "0000001C8E208C348D95E9ACD1DE14A4E9B3D5FB3935A30EC749D69952254706FA12F32F8AF44FEC22F3903E",
+          "certpath": "D:/HLQ/Documents/HarmonyOS/XUPT_Rental/东邮租房.cer",
+          "keyAlias": "xupt_rental",
+          "keyPassword": "0000001C78FCF1541B28CAB663A40505989D1E488FF625C7966BE28ABB0D9E5B11813600AC75C51C133E4918",
+          "profile": "D:/HLQ/Documents/HarmonyOS/XUPT_Rental/东邮租房Profile发布Release.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "D:/HLQ/Documents/HarmonyOS/XUPT_Rental/xupt_rental.p12"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",
@@ -64,6 +78,14 @@
     {
       "name": "mine",
       "srcPath": "./features/mine",
+    },
+    {
+      "name": "like",
+      "srcPath": "./features/like",
+    },
+    {
+      "name": "permissionmanger",
+      "srcPath": "./common/permissionmanger"
     }
   ]
 }

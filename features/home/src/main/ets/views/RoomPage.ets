@@ -56,8 +56,6 @@ export struct RoomPage {
       })
   }
 
-
-
   @Builder
   NavTirle(){
     Text(this.houseTitle).fontWeight(700).fontSize(rvp(16)).textAlign(TextAlign.Center)

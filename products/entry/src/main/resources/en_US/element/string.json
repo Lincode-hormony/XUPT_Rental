@@ -11,6 +11,18 @@
     {
       "name": "EntryAbility_label",
       "value": "XUPT_Rental"
+    },
+    {
+      "name": "premission_reason_location",
+      "value": "location_reason"
+    },
+    {
+      "name": "permission_reason_calendar",
+      "value": "calendar_reason"
+    },
+    {
+      "name": "permission_reason_imagevideo",
+      "value": "imagevideo"
     }
   ]
 }

@@ -11,6 +11,18 @@
     {
       "name": "EntryAbility_label",
       "value": "东邮租房"
+    },
+    {
+      "name": "premission_reason_location",
+      "value": "用于东邮租房位置分享"
+    },
+    {
+      "name": "permission_reason_calendar",
+      "value": "用于添加预约日程，删除过期日程"
+    },
+    {
+      "name": "permission_reason_imagevideo",
+      "value": "用于保存房源图片，切换用户头像"
     }
   ]
 }

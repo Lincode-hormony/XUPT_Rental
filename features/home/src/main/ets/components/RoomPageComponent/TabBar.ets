@@ -2,6 +2,9 @@ import { ToastUtil,PreferencesUtil} from "@pura/harmony-utils";
 import { rvp } from "uicomponent";
 import { PostBookHome } from "../../apis/home";
 import { IBookHomeObject, IBookHomeParams } from "../../model/BookData";
+/**
+ * 房间详情页面下面的导航栏 收藏 咨询 预约看房
+ */
 @Component
 export struct TabBar {
   @Prop @Watch('onroomidChange') roomid:string
@@ -35,12 +38,12 @@ export struct TabBar {
         Image(this.isLike?$r("app.media.lis_like"):$r("app.media.no_like")).width(rvp(18))
           .onClick(()=>{
             if(this.isLike){
-              PreferencesUtil.deleteSync(this.roomid)
+              PreferencesUtil.deleteSync(this.roomid,"Like")
               this.isLike=false;
-              ToastUtil.showToast('取消收藏成功')
+              ToastUtil.showToast('取消收藏')
             }
             else{
-              PreferencesUtil.putSync(this.roomid,true);
+              PreferencesUtil.putSync(this.roomid,true,"Like");
               this.isLike=true;
               ToastUtil.showToast('收藏成功');
             }

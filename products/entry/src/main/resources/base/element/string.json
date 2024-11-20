@@ -11,6 +11,18 @@
     {
       "name": "EntryAbility_label",
       "value": "东邮租房"
+    },
+    {
+      "name": "premission_reason_location",
+      "value": "定位授权原因"
+    },
+    {
+      "name": "permission_reason_calendar",
+      "value": "日历授权原因"
+    },
+    {
+      "name": "permission_reason_imagevideo",
+      "value": "图片视频授权原因"
     }
   ]
 }

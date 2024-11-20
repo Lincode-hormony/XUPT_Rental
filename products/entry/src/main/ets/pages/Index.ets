@@ -1,9 +1,10 @@
 import {Home} from 'home'
-
 import {Discover} from 'discover'
 import {Map} from 'map'
 import {Mine} from 'mine'
+import {LikePage} from 'like'
 import {BookList} from 'booklist'
+import {PreferencesUtil} from '@pura/harmony-utils'
 import { RoomPage } from 'home/src/main/ets/views/RoomPage'
 import { RoomList } from 'home/src/main/ets/views/RoomList'
 
@@ -14,7 +15,23 @@ struct Index {
    * 定义相应的NavPathStack，供其他模块使用
    */
   @Provide('homePathStack') homePathStack:NavPathStack=new NavPathStack()
-  @State curIndex:number=0;
+  @Provide("TabsCurIndex") curIndex:number=0
+  aboutToAppear(): void {
+    PreferencesUtil.init('Like');//收藏的首选项
+  }
+  /**
+   * 路由表
+   */
+  @Builder
+  homeRouter(name:string,id:string){
+    if(name==='RoomPage'){
+      RoomPage({roomId:id})
+    }
+    else if(name==='RoomList'){
+      RoomList()
+    }
+  }
+
   /**
    * Tabs的Bar
    */
@@ -25,15 +42,6 @@ struct Index {
         .height(20)
       Text(name)
         .fontSize(10)
-    }
-  }
-  @Builder
-  homeRouter(name:string,id:string){
-    if(name==='RoomPage'){
-      RoomPage({roomId:id})
-    }
-    else if(name==='RoomList'){
-      RoomList()
     }
   }
 
@@ -60,6 +68,9 @@ struct Index {
           Mine()
         }.tabBar(this.tabBar($r('app.media.tabbar_my'), $r('app.media.tabbar_my_active'), '我的', 4))
 
+        TabContent() {
+          LikePage()
+        }.tabBar(this.tabBar($r('app.media.tabbar_service'), $r('app.media.tabbar_service_active'), '收藏', 5))
       }
       .height('100%')
       .width('100%')
@@ -67,13 +78,10 @@ struct Index {
       .onChange((index:number)=> {
         this.curIndex = index;
       })
-      // .backgroundColor(Color.Green)
     }
     .height('100%')
-    // .backgroundColor(Color.Pink)
     .width('100%')
     .navDestination(this.homeRouter)
     .hideToolBar(true)
-
   }
 }
