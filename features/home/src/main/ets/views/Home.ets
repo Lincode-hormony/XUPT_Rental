@@ -17,7 +17,7 @@ import { permissionManager } from 'permissionmanger';
 @Component
 export  struct Home {
   //定位
-  @State address:string='北京'
+  @State address:string='西安'
   // 首页数据
   @State bannerList: IBannerList = [];
   @State navList: INavList = [];

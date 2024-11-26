@@ -2,6 +2,7 @@
   "src": [
     "pages/Index",
     "pages/test/LocationKitTestPage",
-    "pages/test/PermissionPage"
+    "pages/test/PermissionPage",
+    "pages/test/MapKitTestPage"
   ]
 }

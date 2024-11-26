@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "storePassword": "0000001C8E208C348D95E9ACD1DE14A4E9B3D5FB3935A30EC749D69952254706FA12F32F8AF44FEC22F3903E",
-          "certpath": "D:/HLQ/Documents/HarmonyOS/XUPT_Rental/东邮租房.cer",
-          "keyAlias": "xupt_rental",
-          "keyPassword": "0000001C78FCF1541B28CAB663A40505989D1E488FF625C7966BE28ABB0D9E5B11813600AC75C51C133E4918",
-          "profile": "D:/HLQ/Documents/HarmonyOS/XUPT_Rental/东邮租房Profile发布Release.p7b",
+          "storePassword": "0000001C9AF4A9BE06C2934564E940226B756C125A1835E67923BA5264A68CD02393B60B117849446FFE4B46",
+          "certpath": "D:/HLQ/Documents/HarmonyOS/XUPT_Rental/certificate/xupt_rental (2).cer",
+          "keyAlias": "HlqKey",
+          "keyPassword": "0000001C1770089603224C875991860EF65F0A22FE145741C65A4A504892517D4D8AD0001FFFF2EEBBB589AD",
+          "profile": "D:/HLQ/Documents/HarmonyOS/XUPT_Rental/certificate/xupt_rentalRelease (5).p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "D:/HLQ/Documents/HarmonyOS/XUPT_Rental/xupt_rental.p12"
+          "storeFile": "D:/HLQ/Documents/HarmonyOS/XUPT_Rental/certificate/.p12"
         }
       }
     ],

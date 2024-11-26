@@ -1,4 +1,4 @@
-import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
+import { AbilityConstant, bundleManager, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { permissionManager } from '../manger';
@@ -18,8 +18,11 @@ export default class EntryAbility extends UIAbility {
     /**
      * 先设置一个固定的token临时开发，后续换成自己的（在登录的时候设置）
      */                           //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3MzE4NDQ1MTUsInVzZXJfaWQiOiIxIn0.BlWvb40AZq8mucTWylVZFqEfpzcYUbgQ75r838BVJSE
-    AppStorage.setOrCreate('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3MzE4NDQ1MTUsInVzZXJfaWQiOiIxIn0.BlWvb40AZq8mucTWylVZFqEfpzcYUbgQ75r838BVJSE')
-
+    AppStorage.setOrCreate('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3MzI3MTI2NzUsInVzZXJfaWQiOiIxIn0.ZYJONl7MhFOVsmPyTCZcm9rgfEm13pYa2cY0Z7-jX5Y')
+    let flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_SIGNATURE_INFO;
+    let bundleInfo = bundleManager.getBundleInfoForSelfSync(flag)
+    let appId = bundleInfo.signatureInfo.appId;
+    console.info('appId: '+appId)
     windowStage.loadContent('pages/Index', (err) => {
       if (err.code) {
         hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');

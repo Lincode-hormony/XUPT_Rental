@@ -64,25 +64,32 @@ export struct RoomPage {
 
   build() {
     NavDestination(){
-      Scroll() {
-        Column() {
-          NavSwiper({housePictureList:$housePictureList})
-          RentPrice({Price:this.room.rentPriceUnitListing,Unit:this.room.rentPriceUnit})
-          MetaInfo({metaInfo:$metaInfo})
-          TagList({tagList:$tagList})
-          RentTerm({rentTerm:this.rentTerm!})
-          RentInfo({rentInfo:this.rentInfo})
-          Text('物品配置').fontSize(rvp(18)).fontWeight(700).alignSelf(ItemAlign.Start)
-            .margin({left:rvp(16),top:rvp(32)})
-          Column({space:rvp(24)}){
-              if(this.householdItemList[0]) HouseholdItem1({householdItem:this.householdItemList[0]})
-              if(this.householdItemList[1]) HouseholdItem2({householdItem:this.householdItemList[1]})
-          }.margin({top:rvp(16)})
-          if(this.supportLIst.length) SupportList({supportList:this.supportLIst})
-          TabBar({roomid:this.roomId})
-        }
-        .width('100%')
-      }
+
+         Column(){
+          Row(){
+            Scroll() {
+              Column() {
+                NavSwiper({ housePictureList: $housePictureList })
+                RentPrice({ Price: this.room.rentPriceUnitListing, Unit: this.room.rentPriceUnit })
+                MetaInfo({ metaInfo: $metaInfo })
+                TagList({ tagList: $tagList })
+                RentTerm({ rentTerm: this.rentTerm! })
+                RentInfo({ rentInfo: this.rentInfo })
+                Text('物品配置').fontSize(rvp(18)).fontWeight(700).alignSelf(ItemAlign.Start)
+                  .margin({ left: rvp(16), top: rvp(32) })
+                Column({ space: rvp(24) }) {
+                  if (this.householdItemList[0]) HouseholdItem1({ householdItem: this.householdItemList[0] })
+                  if (this.householdItemList[1]) HouseholdItem2({ householdItem: this.householdItemList[1] })
+                }.margin({ top: rvp(16) })
+
+                if (this.supportLIst.length) SupportList({ supportList: this.supportLIst })
+
+              }.width('100%')
+            }
+          }.height('90%').width('100%')
+          TabBar({roomid:this.roomId}).backgroundColor(Color.White)
+         }
+
       // .width('100%')
       // .height('100%')
     }

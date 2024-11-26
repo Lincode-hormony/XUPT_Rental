@@ -13,6 +13,7 @@ struct LocationKitTestPage {
     this.requestPermission();
   }
   async requestPermission(){
+
     this.isGrant=await permissionManager.requestPermissions([
       "ohos.permission.LOCATION",
       "ohos.permission.APPROXIMATELY_LOCATION"
@@ -36,10 +37,10 @@ struct LocationKitTestPage {
        */
       Button('开启位置变化订阅')
         .onClick(()=>{
-            geoLocationManager.on("locationChange",{},(location)=>{
-              this.location=location
-            })
+          geoLocationManager.on("locationChange",{},(location)=>{
+            this.location=location
           })
+        })
       /**
        * 关闭位置变化订阅
        */
