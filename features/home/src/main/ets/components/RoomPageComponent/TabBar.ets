@@ -1,52 +1,50 @@
 import { ToastUtil,PreferencesUtil} from "@pura/harmony-utils";
 import { rvp } from "uicomponent";
 import { PostBookHome } from "../../apis/home";
-import { IBookHomeObject, IBookHomeParams } from "../../model/BookData";
-import { BusinessError } from "@kit.BasicServicesKit";
+import {  IBookHomeParams } from "../../model/BookData";
 import { bookDialog } from "./bookDialog";
+//验证电话号码是否合法
+function isPhoneNumber(phoneNumber: string): boolean {
+  const regExp = /^1[3-9]\d{9}$/;
+  return regExp.test(phoneNumber);
+}
 
 /**
  * 房间详情页面下面的导航栏 收藏 咨询 预约看房
  */
 @Component
 export struct TabBar {
-  @Prop @Watch('onroomidChange') roomid:string
+  @Prop roomid:string
   @State isLike:boolean=PreferencesUtil.hasSync(this.roomid)
-  @State bookHomeParams:IBookHomeParams={} as IBookHomeParams
-  @State bookHomeObject:IBookHomeObject={} as IBookHomeObject
-  aboutToAppear(): void {
-    this.bookHomeParams={
-      "name": '黄令群',
-      "date": '2024-11-28',
-      "houseId": this.roomid,
-      "phone": '15322442034',
-      "comment": '测试死数据'
+
+  // 预约看房
+  async book(param:IBookHomeParams) {
+    if (!param.name) {
+      ToastUtil.showToast('请输入姓名')
+      return;
+    }
+    if (!param.phone) {
+      ToastUtil.showToast('请输入手机号')
+      return;
+    }
+    if (!isPhoneNumber(param.phone)) {
+      ToastUtil.showToast('请输入合法的手机号')
+      return;
+    }
+    try {
+      await PostBookHome(param)
+      ToastUtil.showToast('预约成功')
+    } catch {
+      ToastUtil.showToast('预约时间至少提前两天')
     }
   }
-  onroomidChange(){
-      this.bookHomeParams={
-        "name": '黄令群',
-        "date": '2024-11-28',
-        "houseId": this.roomid,
-        "phone": '15322442034',
-        "comment": '测试死数据'
-      }
-  }
-
+  //预约填写相关信息弹窗
   bookController: CustomDialogController = new CustomDialogController({
     builder: bookDialog({
       confirm:(params:IBookHomeParams)=>{
         params.houseId=this.roomid;
-        PostBookHome(this.bookHomeParams)
-          .then(()=>{
-            // this.bookHomeObject=data
-            //  console.info(`测试输出 bookHomeObject = ${JSON.stringify(this.bookHomeParams)}`)
-            ToastUtil.showToast('预约成功')
-          })
-          .catch((err:BusinessError)=>{
-            // console.info(`测试输出 bookHomeObject = ${JSON.stringify(this.bookHomeParams)} ${JSON.stringify(this.roomid)}`)
-            ToastUtil.showToast('预约失败'+err.code)
-          })
+        // console.log('test: '+JSON.stringify(params))
+        this.book(params)
       }
     }),
     alignment: DialogAlignment.Bottom,

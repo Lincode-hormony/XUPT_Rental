@@ -18,7 +18,7 @@ export default class EntryAbility extends UIAbility {
     /**
      * 先设置一个固定的token临时开发，后续换成自己的（在登录的时候设置）
      */                           //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3MzE4NDQ1MTUsInVzZXJfaWQiOiIxIn0.BlWvb40AZq8mucTWylVZFqEfpzcYUbgQ75r838BVJSE
-    AppStorage.setOrCreate('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3MzI3MTI2NzUsInVzZXJfaWQiOiIxIn0.ZYJONl7MhFOVsmPyTCZcm9rgfEm13pYa2cY0Z7-jX5Y')
+    AppStorage.setOrCreate('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3MzI5NjcxMDgsInVzZXJfaWQiOiIxIn0.KvGycZeyHgQibUMG4JfELtYiKbIkmFtdjNx2O4hZ_sc')
     let flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_SIGNATURE_INFO;
     let bundleInfo = bundleManager.getBundleInfoForSelfSync(flag)
     let appId = bundleInfo.signatureInfo.appId;

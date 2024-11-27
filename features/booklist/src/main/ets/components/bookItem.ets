@@ -23,7 +23,7 @@ export struct BookItem {
       }.width('100%')
       Row({space:rvp(8)}){
         Column(){
-          Image(this.bookHistoryItem.img).width(rvp(128)).height(rvp(120))
+          Image(this.bookHistoryItem.img).width(rvp(128)).height(rvp(120)).borderRadius(rvp(8))
         }
         Column({space:rvp(8)}){
           Text(this.bookHistoryItem.title).fontSize(rvp(16)).fontWeight(500).fontColor('#000000')

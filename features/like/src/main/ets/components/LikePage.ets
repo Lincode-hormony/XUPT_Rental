@@ -84,7 +84,7 @@ export struct LikePage {
             }.width('100%').alignItems(HorizontalAlign.Start)
           }.width('100%').height(rvp(180))
         },(item:IRoomData)=>item.id)
-      }.padding({left:rvp(16),right:rvp(16),bottom:rvp(40)})
+      }.padding({left:rvp(16),right:rvp(16),bottom:rvp(40)}).backgroundColor('#ffececec')
     }.width('100%').height('100%')
   }
 }

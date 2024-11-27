@@ -64,7 +64,7 @@ export  struct Home {
         this.navList = data.navList
         this.planList = data.planList
         this.tileList = data.tileList
-        console.info(JSON.stringify(this.tileList,null,2))
+        // console.info(JSON.stringify(this.tileList,null,2))
       })
       .catch((err:BusinessError)=>{
         console.error("首页日志,获取错误 code: "+json.stringify(err,null,2))
