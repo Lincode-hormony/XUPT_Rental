@@ -15,7 +15,8 @@ function isPhoneNumber(phoneNumber: string): boolean {
 @Component
 export struct TabBar {
   @Prop roomid:string
-  @State isLike:boolean=PreferencesUtil.hasSync(this.roomid)
+  @StorageProp("Phone") userPhone:string=''
+  @State isLike:boolean=this.userPhone?PreferencesUtil.hasSync(this.roomid,"Like"+this.userPhone):false
 
   // 预约看房
   async book(param:IBookHomeParams) {
@@ -63,13 +64,13 @@ export struct TabBar {
       Column(){
         Image(this.isLike?$r("app.media.lis_like"):$r("app.media.no_like")).width(rvp(18))
           .onClick(()=>{
-            if(this.isLike){
-              PreferencesUtil.deleteSync(this.roomid,"Like")
+            if(this.isLike&&this.userPhone){
+              PreferencesUtil.deleteSync(this.roomid,"Like"+this.userPhone)
               this.isLike=false;
               ToastUtil.showToast('取消收藏')
             }
             else{
-              PreferencesUtil.putSync(this.roomid,true,"Like");
+              PreferencesUtil.putSync(this.roomid,true,"Like"+this.userPhone);
               this.isLike=true;
               ToastUtil.showToast('收藏成功');
             }
@@ -87,7 +88,7 @@ export struct TabBar {
       }.width(rvp(113)).height(rvp(34)).type(ButtonType.Normal).backgroundColor('#24A17B')
       .margin({right:rvp(21)})
       .onClick(()=>{
-        if(!AppStorage.get("token")){
+        if(!AppStorage.get("Token")){
           ToastUtil.showToast('还未登录')
         }
         else{

@@ -8,17 +8,16 @@ export interface AnyObject {
 }
 
 const request = axios.create({
-  // baseURL: 'http://192.168.1.185:6060', // 通过 ipconfig 查询当前电脑的 ip，使用自己电脑的 ip 地址 155
-  baseURL: 'http://192.168.1.185:6060', //158
+  baseURL: 'http://192.168.1.185:6060',
   timeout: 20000,
 })
 
 request.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     // 未来需要添加 token
-    const token:string=AppStorage.get<string>("token");
-    // console.info(`固定的token = ${token}`)
-    if(token) config.headers.token = AppStorage.get<string>("token");
+    const token:string=AppStorage.get<string>("Token"); //合并修改
+    // console.info(`获取的token = ${token}`)
+    if(token) config.headers.token = AppStorage.get<string>("Token"); //合并修改
     return config;
   }
 )

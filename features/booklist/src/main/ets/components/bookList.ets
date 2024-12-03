@@ -19,9 +19,11 @@ export struct BookList {
   @State bookHistoryList:IBookHistoryList=[]
   @State isList:boolean=true;
   @State isdesc:number=0;
+  @Watch("aboutToAppear") @StorageProp("Token") token:string=''
   @Consume('homePathStack') homePathStack:NavPathStack
-  aboutToAppear(): void {
-      this.getBookHistoryList()
+   async aboutToAppear() {
+      if(this.token) await this.getBookHistoryList()
+      // console.info('历史数据'+JSON.stringify(this.bookHistoryList,null,2));
   }
   //获取网络数据
   async getBookHistoryList(){

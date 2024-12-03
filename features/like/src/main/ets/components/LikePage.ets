@@ -19,12 +19,13 @@ export struct LikePage {
   @State likeIdList:string[]=[];
   @State roomList:IRoomData[]=[]
   @Consume("TabsCurIndex") @Watch("aboutToAppear") curIndex:number;
+  @StorageProp("Phone") userPhone:string=''
   /**
    * 获取收藏房源数据
    */
   aboutToAppear(): void {
-    if(this.curIndex===5){
-      PreferencesUtil.getAll("Like")
+    if(this.curIndex===2&&this.userPhone){
+      PreferencesUtil.getAll("Like"+this.userPhone)
         .then((value:object)=>{
           this.likeIdList=getObjKeys(value);
           // console.debug('LikePage: '+JSON.stringify((value as HashMap<string,boolean>).keys()))
