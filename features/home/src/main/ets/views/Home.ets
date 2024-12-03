@@ -16,7 +16,7 @@ import { permissionManager } from 'permissionmanger';
 
 @Component
 export  struct Home {
-  //定位
+  //定位默认值
   @State address:string='西安'
   // 首页数据
   @State bannerList: IBannerList = [];
@@ -35,9 +35,7 @@ export  struct Home {
     this.getHomeData()
     this.GetRoomRecommend()
   }
-  /**
-   * 获取当前地理位置
-   */
+  //获取当前地理位置
   async getLocation(){
     //先获取权限
     await permissionManager.requestPermissions([
@@ -79,7 +77,6 @@ export  struct Home {
   }
 
   build() {
-    // Navigation(this.homePathStack){
     NavDestination() {
       Scroll() {
         Column() {
@@ -99,6 +96,5 @@ export  struct Home {
       .width('100%')
       .height('100%')
     }
-    // }.navDestination(this.homeRouter)
   }
 }
