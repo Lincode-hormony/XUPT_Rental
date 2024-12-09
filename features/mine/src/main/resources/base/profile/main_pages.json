@@ -1,6 +1,6 @@
 {
   "src": [
-    "components/MainPage",
+    "components/minePage",
     "components/login"
   ]
 }

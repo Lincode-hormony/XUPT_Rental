@@ -1,4 +1,9 @@
-import {sendSMSCodeApi} from '../api/login'
+import { BuilderNameConstants, RouterNameConstants } from 'router/src/main/ets/constants/RouterConstants'
+import { RouterModel } from 'router/src/main/ets/model/RouterModel'
+import { RouterUtil } from 'router/src/main/ets/utils/RouterUtil'
+import { Response, sendSMSCodeApi} from '../api/login'
+import { backUserInfo } from './loginCode'
+
 export class LoginPhone{
   phone:string=''
 }
@@ -6,13 +11,19 @@ export class LoginPhone{
 账号的Token每一次都需要登录一边才能拿到，
 待修改：如果之前登陆过，没有退出登录，则本次不需要再次登录，直接延用之前的登陆状态
  */
+
+@Builder
+function loginPageBuilder(){
+  loginPage()
+}
+
 @Component
 export struct loginPage {
 
 
   @State isSelect:boolean=false
   @State phoneNumber:LoginPhone=new LoginPhone()
-  @Consume('loginPathStack') pageStack :NavPathStack
+
 
   @Builder
   NavTitle(){
@@ -36,7 +47,7 @@ export struct loginPage {
           Image($r('app.media.close'))
             .width(20)
             .onClick(()=>{
-              this.pageStack.pop(this.phoneNumber,true)
+              RouterUtil.pop(RouterNameConstants.ENTRY_HAP)
             })
 
           Text('验证码登录')
@@ -88,13 +99,11 @@ export struct loginPage {
               .backgroundColor('#ff69d76c')
               .onClick(()=>{
                 this.send()
-
-                let loginPhone:LoginPhone=new LoginPhone()
-
-                let pageInfo:NavPathInfo=new NavPathInfo('loginCode',this.phoneNumber,(popInfo:PopInfo)=>{
-                  let loginPhone:LoginPhone=popInfo.info.param as LoginPhone
+                RouterUtil.push(RouterNameConstants.ENTRY_HAP,BuilderNameConstants.MINE_LOGINCODE,this.phoneNumber,(popInfo)=>{
+                  let userInfo:Response=popInfo.result as Response
+                  console.log('登录：返回第一页的用户信息：'+JSON.stringify(userInfo))
+                  RouterUtil.getRouter(RouterNameConstants.ENTRY_HAP)?.pop(userInfo)
                 })
-                this.pageStack.replacePath(pageInfo,true)
               })
 
           }
@@ -127,7 +136,12 @@ export struct loginPage {
     }
     .hideTitleBar(true)
 
-
-
   }
+}
+
+
+const builderName:string=BuilderNameConstants.MINE_LOGIN
+if(!RouterUtil.getBuilder(builderName)){
+  const builder:WrappedBuilder<[object]>=wrapBuilder(loginPageBuilder)
+  RouterUtil.registerBuilder(builderName,builder)
 }

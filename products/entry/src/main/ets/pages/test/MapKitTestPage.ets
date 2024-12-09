@@ -35,7 +35,7 @@ struct Index{
   build() {
     Stack() {
       // 调用MapComponent组件初始化地图
-      MapComponent({ mapOptions: this.mapOption, mapCallback: this.callback }).width('100%').height('100%');
+      //MapComponent({ mapOptions: this.mapOption, mapCallback: this.callback }).width('100%').height('100%');
     }.height('100%')
   }
 }

@@ -25,5 +25,5 @@ export const loginApi=(phone:string,code:string):Promise<userID>=>{
 }
 
 export const getUserApi=(token:string):Promise<Response>=>{
-  return http.get<Response>('/auth/user/userInfo',{token})
+  return http.get<Response>('/auth/user/userInfo')
 }
