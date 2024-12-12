@@ -2,6 +2,9 @@ import { getBookHistoryApi } from "../apis/book";
 import { IBookHistoryItem, IBookHistoryList } from "../model/BookData";
 import { BookItem } from "./bookItem";
 import {rvp} from 'uicomponent'
+import { BuilderNameConstants, RouterNameConstants } from "router/src/main/ets/constants/RouterConstants";
+import { RouterUtil } from "router/src/main/ets/utils/RouterUtil";
+
 /**
  * 预约历史记录
  */
@@ -20,7 +23,7 @@ export struct BookList {
   @State isList:boolean=true;
   @State isdesc:number=0;
   @Watch("aboutToAppear") @StorageProp("Token") token:string=''
-  @Consume('homePathStack') homePathStack:NavPathStack
+  // @Consume('homePathStack') homePathStack:NavPathStack
    async aboutToAppear() {
       if(this.token) await this.getBookHistoryList()
       // console.info('历史数据'+JSON.stringify(this.bookHistoryList,null,2));
@@ -91,7 +94,8 @@ export struct BookList {
             if(!this.isList||bookHistoryItem.date>=getCurrentYearMonthDay())
             BookItem({bookHistoryItem:bookHistoryItem})
               .onClick(()=>{
-                this.homePathStack.pushPathByName('RoomPage',bookHistoryItem.houseId)
+                // this.homePathStack.pushPathByName('RoomPage',bookHistoryItem.houseId)
+                RouterUtil.push(RouterNameConstants.ENTRY_HAP,BuilderNameConstants.ROOM_PAGE,bookHistoryItem.houseId)
               })
           },(item:IBookHistoryItem)=>item.id)
         }.width('100%').scrollBar(BarState.Off).backgroundColor('#ffececec').padding({left:rvp(16),right:rvp(16),bottom:rvp(40)})

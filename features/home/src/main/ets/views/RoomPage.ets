@@ -20,7 +20,13 @@ import {  HouseholdItem1 } from '../components/RoomPageComponent/HouseholdItem1'
 import { HouseholdItem2 } from '../components/RoomPageComponent/HouseholdItem2'
 import { SupportList } from '../components/RoomPageComponent/SupportList'
 import { TabBar } from '../components/RoomPageComponent/TabBar'
+import { BuilderNameConstants } from 'router/src/main/ets/constants/RouterConstants';
+import { RouterUtil } from 'router/src/main/ets/utils/RouterUtil'
 
+@Builder
+function roomPageBuilder(arg:object){
+  RoomPage({roomId:''+arg})
+}
 @Component
 export struct RoomPage {
   @Prop roomId: string;
@@ -97,3 +103,8 @@ export struct RoomPage {
   }
 }
 
+const builderName:string=BuilderNameConstants.ROOM_PAGE
+if(!RouterUtil.getBuilder(builderName)){
+  const builder:WrappedBuilder<[object]>=wrapBuilder(roomPageBuilder)
+  RouterUtil.registerBuilder(builderName,builder)
+}

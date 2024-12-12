@@ -1,9 +1,11 @@
+import { BuilderNameConstants, RouterNameConstants } from "router/src/main/ets/constants/RouterConstants"
+import { RouterUtil } from "router/src/main/ets/utils/RouterUtil"
 import { IRoomRecommendItem, IRoomRecommendList } from "../../model/HomeData"
 
 @Component
 export struct RoomRecommendGrid {
   @Link roomRecommendList:IRoomRecommendList
-  @Consume('homePathStack') homePathStack:NavPathStack
+  // @Consume('homePathStack') homePathStack:NavPathStack
   // 房源推荐区域
   @Builder
   RoomRecommendItem(item:IRoomRecommendItem){
@@ -45,7 +47,8 @@ export struct RoomRecommendGrid {
     .height(210)
     .width('100%')
     .onClick(()=>{
-      this.homePathStack.pushPathByName('RoomPage',item.id)
+      // this.homePathStack.pushPathByName('RoomPage',item.id)
+      RouterUtil.push(RouterNameConstants.ENTRY_HAP,BuilderNameConstants.ROOM_PAGE,item.id)
     })
 
   }
@@ -59,8 +62,10 @@ export struct RoomRecommendGrid {
         }.margin({right:160})
         Text('更多推荐 >').fontSize(12).fontWeight(400).fontColor('#bbbbbb')
           .onClick(()=>{
-            this.homePathStack.pushPathByName('RoomList',null)
+            // this.homePathStack.pushPathByName('RoomList',null)
+            RouterUtil.push(RouterNameConstants.ENTRY_HAP,BuilderNameConstants.ROOM_LIST,undefined)
           })
+
       }.width('88%').justifyContent(FlexAlign.SpaceBetween).margin({bottom:10})
       Grid(){
         ForEach(this.roomRecommendList,(item:IRoomRecommendItem,index)=>{

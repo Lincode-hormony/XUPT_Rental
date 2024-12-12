@@ -1,6 +1,8 @@
 import {PreferencesUtil} from '@pura/harmony-utils'
 import {IRoomData,GetRoomDetailApi} from 'home'
 import { ITagItem } from 'home/src/main/ets/model/HomeData';
+import { BuilderNameConstants, RouterNameConstants } from 'router/src/main/ets/constants/RouterConstants';
+import { RouterUtil } from 'router/src/main/ets/utils/RouterUtil';
 import { rvp } from 'uicomponent';
 
 /**
@@ -14,7 +16,7 @@ function getObjKeys(obj: Object): string[] {
 }
 @Component
 export struct LikePage {
-  @Consume('homePathStack') homePathStack:NavPathStack
+  // @Consume('homePathStack') homePathStack:NavPathStack
   @State message: string = '收藏';
   @State likeIdList:string[]=[];
   @State roomList:IRoomData[]=[]
@@ -23,26 +25,27 @@ export struct LikePage {
   /**
    * 获取收藏房源数据
    */
-  // aboutToAppear(): void {
-  //   if(this.curIndex===2&&this.userPhone){
-  //     PreferencesUtil.getAll("Like"+this.userPhone)
-  //       .then((value:object)=>{
-  //         this.likeIdList=getObjKeys(value);
-  //         // console.debug('LikePage: '+JSON.stringify((value as HashMap<string,boolean>).keys()))
-  //         // console.debug('LikePage: '+JSON.stringify(Keys))
-  //         this.roomList=[];
-  //         //遍历把所有的房间数据都放进列表中
-  //         for(let i=0;i<this.likeIdList.length;i++){
-  //           GetRoomDetailApi(this.likeIdList[i]).then((data:IRoomData)=>{
-  //             this.roomList.push(data)
-  //           })
-  //         }
-  //       })
-  //       .catch(()=>{
-  //         console.debug('LikePage: 获取首选项Keys失败')
-  //       })
-  //   }
-  // }
+  aboutToAppear(): void {
+    if(this.curIndex===2&&this.userPhone){
+      PreferencesUtil.getAll("Like"+this.userPhone)
+        .then((value:object)=>{
+          this.likeIdList=getObjKeys(value);
+          // console.debug('LikePage: '+JSON.stringify((value as HashMap<string,boolean>).keys()))
+          // console.debug('LikePage: '+JSON.stringify(Keys))
+          this.roomList=[];
+          //遍历把所有的房间数据都放进列表中
+          for(let i=0;i<this.likeIdList.length;i++){
+            GetRoomDetailApi(this.likeIdList[i]).then((data:IRoomData)=>{
+              this.roomList.push(data)
+            })
+          }
+        })
+        .catch(()=>{
+          console.debug('LikePage: 获取首选项Keys失败')
+        })
+    }
+  }
+
   build() {
     Column() {
       Row(){
@@ -64,7 +67,8 @@ export struct LikePage {
               Row({space:rvp(10)}){
                 Image(item.housePicture[0].picList[0]).width(rvp(160)).height(rvp(124)).borderRadius(rvp(8))
                   .onClick(()=>{
-                    this.homePathStack.pushPathByName('RoomPage',item.id)
+                    // this.homePathStack.pushPathByName('RoomPage',item.id)
+                    RouterUtil.push(RouterNameConstants.ENTRY_HAP,BuilderNameConstants.ROOM_PAGE,item.id)
                   })
                 Column(){
                   Text(item.address).fontSize(18).fontWeight(500).alignSelf(ItemAlign.Start)

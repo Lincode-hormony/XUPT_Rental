@@ -40,11 +40,18 @@ export class RouterUtil{
 
   //routerModel是自定义的
   //给出操作的页面栈，要跳转的页面名称，就可以完成在该页面栈加入目标页面的操作
-  public static push(routerName:string,builderName:string,param?:object,onPop?:Callback<PopInfo>){
+  /**
+   * 黄令群
+   * @param routerName
+   * @param builderName
+   * @param param 加上了string类，因为在跳转到房间详情页面的时候需要传参string的roomid
+   * @param onPop
+   */
+  public static push(routerName:string,builderName:string,param?:object|string,onPop?:Callback<PopInfo>){
     let router:RouterModel=new RouterModel()
     router.routerName=routerName
     router.builderName=builderName
-    router.param=param
+    router.param=param as object
     router.onPop=onPop
     RouterUtil.push_util(router)
   }

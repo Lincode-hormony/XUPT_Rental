@@ -10,6 +10,13 @@ import {SortRender} from '../components/roomListComponent/sortRender'
 import { ITagItem } from '../model/HomeData'
 import { roomItem } from '../components/roomListComponent/roomItem'
 import { rvp } from 'uicomponent'
+import { RouterUtil } from 'router/src/main/ets/utils/RouterUtil'
+import { BuilderNameConstants, RouterNameConstants } from 'router/src/main/ets/constants/RouterConstants';
+
+@Builder
+function roomListPageBuilder(){
+  RoomList()
+}
 
 @Component
 export struct RoomList {
@@ -90,7 +97,8 @@ export struct RoomList {
             }
             .width(160).height(item.activity? 320:210).backgroundColor('#ffffff')
             .onClick(()=>{
-              this.homePathStack.pushPathByName('RoomPage',item.id)
+               // this.homePathStack.pushPathByName('RoomPage',item.id)
+              RouterUtil.push(RouterNameConstants.ENTRY_HAP,BuilderNameConstants.ROOM_PAGE,item.id)
             })
           },(item:IRoomItem)=>item.id)
         }
@@ -178,4 +186,10 @@ export struct RoomList {
     this.isShow=false;
     this.currentFilter=''
   }
+}
+
+const builderName:string=BuilderNameConstants.ROOM_LIST
+if(!RouterUtil.getBuilder(builderName)){
+  const builder:WrappedBuilder<[object]>=wrapBuilder(roomListPageBuilder)
+  RouterUtil.registerBuilder(builderName,builder)
 }

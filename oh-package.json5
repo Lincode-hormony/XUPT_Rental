@@ -11,13 +11,15 @@
     "map": "file:./features/map",
     "mine": "file:./features/mine",
     "booklist": "file:./features/booklist",
-    "like": "file:./features/like"
+    "like": "file:./features/like",
+    "router": "file:./common/router"
   },
   "devDependencies": {
     "@ohos/hypium": "1.0.19",
     "@ohos/hamock": "1.0.0",
     "@amap/amap_lbs_common": ">=1.1.0",
-    "@amap/amap_lbs_location": ">=1.1.0"
+    "@amap/amap_lbs_location": ">=1.1.0",
+
   },
   "dynamicDependencies": {}
 }

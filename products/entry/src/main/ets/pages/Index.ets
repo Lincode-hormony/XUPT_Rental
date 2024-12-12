@@ -41,18 +41,18 @@ struct Index {
   routerMap(builderName:string,param:object){
     RouterUtil.getBuilder(builderName).builder(param)
   }
-  /**
-   * 路由表
-   */
-  @Builder
-  homeRouter(name:string,id:string){
-    if(name==='RoomPage'){
-      RoomPage({roomId:id})
-    }
-    else if(name==='RoomList'){
-      RoomList()
-    }
-  }
+  // /**
+  //  * 路由表
+  //  */
+  // @Builder
+  // homeRouter(name:string,id:string){
+  //   if(name==='RoomPage'){
+  //     RoomPage({roomId:id})
+  //   }
+  //   else if(name==='RoomList'){
+  //     RoomList()
+  //   }
+  // }
 
 // =======
 
@@ -85,7 +85,7 @@ struct Index {
         }.tabBar(this.tabBar($r('app.media.tabbar_discover'), $r('app.media.tabbar_discover_active'), '发现', 1))
 
         TabContent() {
-          //LikePage()//收藏   地图搞不出来
+          LikePage()//收藏   地图搞不出来
         }.tabBar(this.tabBar($r('app.media.tabbar_service'), $r('app.media.tabbar_service_active'), '收藏', 2))
         // TabContent() {
         //   Map()
@@ -109,7 +109,7 @@ struct Index {
     }
     .height('100%')
     .width('100%')
-    //.navDestination(this.homeRouter)
+    // .navDestination(this.homeRouter)
     .navDestination(this.routerMap)
     .hideToolBar(true)
     .hideTitleBar(true)

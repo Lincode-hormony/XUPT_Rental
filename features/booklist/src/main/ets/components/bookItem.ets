@@ -40,27 +40,3 @@ export struct BookItem {
     }.width('100%')
   }
 }
-/*
-{
-    "id": "2",
-    "date": "2024-11-09",
-    "houseId": "AQ1702976528452681728",
-    "img": "http://localhost:6060/public/room95.jpg",
-    "title": "整租·黄花亭新村 3室1厅 南/北",
-    "subTitle": "58.00m² | 南 北 | 大观区·龙山路",
-    "distanceInfo": null,
-    "rentPrice": "600元/月",
-    "tags": [
-        {
-            "name": "随时看房"
-        },
-        {
-            "name": "精装"
-        },
-        {
-            "name": "双卫生间"
-        }
-    ],
-    "comment": "速约"
-},
- */

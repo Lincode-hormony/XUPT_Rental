@@ -13,6 +13,13 @@ import { geoLocationManager } from '@kit.LocationKit';
 import { rvp } from 'uicomponent';
 import { JSON } from '@kit.ArkTS';
 import { permissionManager } from 'permissionmanger';
+import { RouterUtil } from 'router/src/main/ets/utils/RouterUtil'
+import { BuilderNameConstants } from 'router/src/main/ets/constants/RouterConstants';
+
+@Builder
+function homePageBuilder(){
+  Home()
+}
 
 @Component
 export  struct Home {
@@ -27,7 +34,7 @@ export  struct Home {
   //房源推荐数据
   @State roomRecommendList:IRoomRecommendList=[]
 
-  @Consume('homePathStack') homePathStack:NavPathStack
+  // @Consume('homePathStack') homePathStack:NavPathStack
 
   // 组件生命周期
   aboutToAppear() {
@@ -97,4 +104,12 @@ export  struct Home {
       .height('100%')
     }
   }
+}
+
+
+
+const builderName:string=BuilderNameConstants.HOME
+if(!RouterUtil.getBuilder(builderName)){
+  const builder:WrappedBuilder<[object]>=wrapBuilder(homePageBuilder)
+  RouterUtil.registerBuilder(builderName,builder)
 }
