@@ -35,6 +35,8 @@ Item用interface类型定义，List用type定义
 
 - 共用组件 uiComponent
 
+- 路由管理 RouterModel
+
 ## Other
 
 - 命名规范 
@@ -55,7 +57,7 @@ Item用interface类型定义，List用type定义
 
 # Discover	
 
-作者：林琦峻
+作者：LQJ
 
 内容：
 
@@ -71,6 +73,6 @@ Item用interface类型定义，List用type定义
 
 # Mine
 
-作者：林琦峻
+作者：LQJ
 
-内容：
+1. 实现登录功能，使用路由push到mine_login页面即可开始登录功能。
