@@ -1,9 +1,8 @@
 import {LoginPhone } from '../components/login'
 import {loginApi,getUserApi} from '../api/login'
-import {Response} from './minePage'
 import { BuilderNameConstants, RouterNameConstants } from 'router/src/main/ets/constants/RouterConstants'
 import { RouterUtil } from 'router/src/main/ets/utils/RouterUtil'
-import { PreferencesUtil } from '@pura/harmony-utils'
+import {userModel} from '../model/UserModel'
 
 export class token{
   token:string='111'
@@ -15,8 +14,8 @@ export class backUserInfo{
 }
 
 @Builder
-function loginCodeBuilder(value:object){
-  loginCode()
+function loginCodeBuilder(phoneNum:object){
+  loginCode({phoneNum:phoneNum as LoginPhone})
 }
 
 
@@ -25,25 +24,22 @@ function loginCodeBuilder(value:object){
 export struct loginCode {
 
   async getToken(){
-    const result=await loginApi(this.phoneNumber.phone,this.phoneCode)
+    const result=await loginApi(this.phoneNum.phone,this.phoneCode)
     console.log('登录：获取token信息'+result.token)
     this.Token=result.token
     this.userToken=this.Token
-    this.userPhone=this.phoneNumber.phone // HLQ  用户区别用户的收藏列表
+    this.userPhone=this.phoneNum.phone // HLQ  用户区别用户的收藏列表
     const userinfo=await getUserApi(result.token)
-    console.log('登录：'+JSON.stringify(userinfo))
-    RouterUtil.getRouter(RouterNameConstants.ENTRY_HAP)?.pop(userinfo)
-    //console.log('登录：页面栈信息：'+RouterUtil.getRouter(RouterNameConstants.ENTRY_HAP)?.getAllPathName().toString())
+    this.userInfo=userinfo
+    console.log('登录：userInfo的值：'+JSON.stringify(this.userInfo))
+    RouterUtil.getRouter(RouterNameConstants.ENTRY_HAP)?.pop()
   }
 
-
-  @State userName:string=''
-  @State userImage:string=''
-  @StorageLink('userInfo') userInfo1:Response=new Response()
+  @Prop phoneNum:LoginPhone
+  @StorageLink('UserInfo') userInfo:userModel=new userModel()
   @StorageLink('Token') userToken:string='暂无用户数据'
   @StorageLink('Phone') userPhone:string='' // HLQ  用户区别用户的收藏列表
   @State Token:string='暂无用户数据'
-  @State phoneNumber:LoginPhone=new LoginPhone()
   @State phoneCode:string=''
 
 
@@ -119,12 +115,6 @@ export struct loginCode {
       })
     }
     .hideTitleBar(true)
-    .onReady(()=>{
-      this.phoneNumber=RouterUtil.getRouter(RouterNameConstants.ENTRY_HAP)?.getParamByIndex(2) as LoginPhone
-      console.log('登录：页面栈信息：'+RouterUtil.getRouter(RouterNameConstants.ENTRY_HAP)?.getAllPathName().toString())
-      console.log('登录：电话号码：'+this.phoneNumber.phone)
-    })
-
   }
 }
 

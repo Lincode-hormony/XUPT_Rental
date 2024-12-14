@@ -14,7 +14,7 @@ import { rvp } from 'uicomponent';
 import { JSON } from '@kit.ArkTS';
 import { permissionManager } from 'permissionmanger';
 import { RouterUtil } from 'router/src/main/ets/utils/RouterUtil'
-import { BuilderNameConstants } from 'router/src/main/ets/constants/RouterConstants';
+import { BuilderNameConstants, RouterNameConstants } from 'router/src/main/ets/constants/RouterConstants';
 
 @Builder
 function homePageBuilder(){

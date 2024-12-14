@@ -8,8 +8,8 @@ export interface AnyObject {
 }
 
 const request = axios.create({
-  // baseURL: 'http://192.168.238.97:6060',
-  baseURL: 'http://192.168.1.185:6060',//勿删！！！
+   baseURL: 'http://192.168.34.97:6060',
+  //baseURL: 'http://192.168.1.185:6060',//勿删！！！
   timeout: 20000,
 })
 

@@ -1,8 +1,6 @@
 import { BuilderNameConstants, RouterNameConstants } from 'router/src/main/ets/constants/RouterConstants'
-import { RouterModel } from 'router/src/main/ets/model/RouterModel'
 import { RouterUtil } from 'router/src/main/ets/utils/RouterUtil'
-import { Response, sendSMSCodeApi} from '../api/login'
-import { backUserInfo } from './loginCode'
+import { sendSMSCodeApi} from '../api/login'
 
 export class LoginPhone{
   phone:string=''
@@ -47,7 +45,7 @@ export struct loginPage {
           Image($r('app.media.close'))
             .width(20)
             .onClick(()=>{
-              RouterUtil.pop(RouterNameConstants.ENTRY_HAP)
+              RouterUtil.getRouter(RouterNameConstants.ENTRY_HAP)?.pop()
             })
 
           Text('验证码登录')
@@ -99,11 +97,8 @@ export struct loginPage {
               .backgroundColor('#ff69d76c')
               .onClick(()=>{
                 this.send()
-                RouterUtil.push(RouterNameConstants.ENTRY_HAP,BuilderNameConstants.MINE_LOGINCODE,this.phoneNumber,(popInfo)=>{
-                  let userInfo:Response=popInfo.result as Response
-                  console.log('登录：返回第一页的用户信息：'+JSON.stringify(userInfo))
-                  RouterUtil.getRouter(RouterNameConstants.ENTRY_HAP)?.pop(userInfo)
-                })
+                RouterUtil.push(RouterNameConstants.ENTRY_HAP,BuilderNameConstants.MINE_LOGINCODE,this.phoneNumber)
+                RouterUtil.getRouter(RouterNameConstants.ENTRY_HAP)?.pop()
               })
 
           }

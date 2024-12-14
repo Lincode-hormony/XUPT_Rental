@@ -1,4 +1,5 @@
 import {http} from 'network'
+import { userModel } from '../model/UserModel'
 
 export interface userID{
   token:string
@@ -24,6 +25,6 @@ export const loginApi=(phone:string,code:string):Promise<userID>=>{
   return http.post<userID>('/login',{phone,code})
 }
 
-export const getUserApi=(token:string):Promise<Response>=>{
-  return http.get<Response>('/auth/user/userInfo')
+export const getUserApi=(token:string):Promise<userModel>=>{
+  return http.get<userModel>('/auth/user/userInfo')
 }

@@ -19,6 +19,7 @@ export class RouterUtil{
   //注册路由栈到路由栈表
   public static registerRouter(routerName:string,router:NavPathStack){
     RouterUtil.routerMap.set(routerName,router)
+    console.log('登录：注册了登录路由栈')
   }
 
   //获取路由页面
@@ -53,12 +54,14 @@ export class RouterUtil{
     router.builderName=builderName
     router.param=param as object
     router.onPop=onPop
+    console.log('登录：路由栈信息查询：'+JSON.stringify(router))
     RouterUtil.push_util(router)
   }
 
   public static async push_util(router:RouterModel){
     //获取需要跳转的路由页面所在的包
     const harName=router.builderName.split('_')[0]
+    console.log('登录：要跳转的模块：'+harName)
     //动态导入页面
     //这里就是先Import要跳转页面的模块，然后再在那个模块的Index页面去找是要跳转这个模块的哪个页面
     //这个harInit是在模块入口的Index页面定义的
