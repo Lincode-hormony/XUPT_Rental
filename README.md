@@ -35,6 +35,8 @@ Item用interface类型定义，List用type定义
 
 - 共用组件 uiComponent
 
+- 路由管理 RouterModel
+
 ## Other
 
 - 命名规范 
